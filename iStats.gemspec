@@ -8,11 +8,11 @@ require 'iStats/version'
 spec = Gem::Specification.new do |s|
   s.name          = "iStats"
   s.version       = IStats::VERSION
-  s.authors       = ["Chris911"]
-  s.email         = ["christophe.naud.dulude@gmail.com"]
-  s.description   = %q{iStats is a command-line tool that allows you to easily grab the CPU temperature, fan speeds and battery information on macOS.}
+  s.authors       = ["Chris911 & MacCliF"]
+  s.email         = ["carlosfmoreu@gmail.com"]
+  s.description   = %q{iStats is a command-line tool that allows you to easily grab the CPU & GPU temperature, fan speeds and battery information on macOS.}
   s.summary       = "Stats for your mac"
-  s.homepage      = "https://github.com/Chris911/iStats"
+  s.homepage      = "https://github.com/CFMoreu/iStats"
   s.license       = "MIT"
 
   s.files         = `git ls-files`.split($/)
