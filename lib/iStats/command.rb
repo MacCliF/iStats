@@ -33,7 +33,7 @@ module IStats
 
       # Delegate command to proper class
       #
-      # category - Hardware we are targeting (CPU, fan, etc.)
+      # category - Hardware we are targeting (CPU, GPU fan, etc.)
       # stat     - The stat we want
       #
       def delegate(category, stat, options)
@@ -42,6 +42,8 @@ module IStats
           all
         when 'cpu'
           Cpu.delegate stat
+        when 'gpu'
+          Gpu.delegate stat
         when 'fan'
           Fan.delegate stat
         when 'battery'
@@ -66,6 +68,8 @@ module IStats
       def all
         puts "--- CPU Stats ---\n"
         Cpu.all
+        puts "--- GPU Stats ---\n"
+        Gpu.all
         puts "\n--- Fan Stats ---\n"
         Fan.all
         puts "\n--- Battery Stats ---\n"
@@ -152,6 +156,8 @@ module IStats
           istats all                           Print all stats
           istats cpu                           Print all CPU stats
           istats cpu [temp | temperature]      Print CPU temperature
+          istats gpu                           Print all GPU stats
+          istats gpu [temp | temperature]      Print GPU temperature
           istats fan                           Print all fan stats
           istats fan [speed]                   Print fan speed
           istats battery                       Print all battery stats

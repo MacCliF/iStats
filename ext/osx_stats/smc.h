@@ -1,6 +1,6 @@
 /*
  * Apple System Management Control (SMC) Tool
- * Copyright (C) 2006 devnull
+ * Copyright (C) 2018 Carlos F. Moreu
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,6 +39,7 @@
 
 // key values
 #define SMC_KEY_CPU_TEMP      "TC0P"
+#define SMC_KEY_GPU_TEMP      "TCGC"
 #define SMC_KEY_FAN_SPEED     "F%dAc"
 #define SMC_KEY_FAN_NUM       "FNum"
 #define SMC_KEY_BATTERY_TEMP  "TB0T"
@@ -104,6 +105,7 @@ CFDictionaryRef IOPSGetPowerSourceDescription(CFTypeRef blob, CFTypeRef ps);
 void Init_osx_stats();
 VALUE method_SMCKeySupported(VALUE self, VALUE key);
 VALUE method_get_cpu_temp(VALUE self);
+VALUE method_get_gpu_temp(VALUE self);
 VALUE method_get_fan_speed(VALUE self, VALUE num);
 VALUE method_get_fan_number(VALUE self);
 VALUE method_has_battery(VALUE self);

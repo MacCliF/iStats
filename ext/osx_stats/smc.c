@@ -1,6 +1,6 @@
 /*
  * Apple System Management Control (SMC) Tool
- * Copyright (C) 2006 devnull
+ * Copyright (C) 2018 Carlos F. Moreu
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -320,6 +320,7 @@ int getBatteryCharge() {
 */
 VALUE SMC_INFO = Qnil;
 VALUE CPU_STATS = Qnil;
+VALUE GPU_STATS = Qnil;
 VALUE FAN_STATS = Qnil;
 VALUE BATTERY_STATS = Qnil;
 /*
@@ -327,12 +328,15 @@ VALUE BATTERY_STATS = Qnil;
  * We never call this, Ruby does.
 */
 void Init_osx_stats() {
-    
+
     SMC_INFO = rb_define_module("SMC_INFO");
     rb_define_method(SMC_INFO,"is_key_supported",method_SMCKeySupported,1);
-    
+
     CPU_STATS = rb_define_module("CPU_STATS");
     rb_define_method(CPU_STATS, "get_cpu_temp", method_get_cpu_temp, 0);
+
+    GPU_STATS = rb_define_module("GPU_STATS");
+    rb_define_method(GPU_STATS, "get_gpu_temp", method_get_gpu_temp, 0);
 
     FAN_STATS = rb_define_module("FAN_STATS");
     rb_define_method(FAN_STATS, "get_fan_number", method_get_fan_number, 0);
@@ -353,14 +357,21 @@ VALUE method_SMCKeySupported(VALUE self, VALUE key)
     SMCOpen();
     double temp = SMCGetTemperature(keyString);
     SMCClose();
-    
+
     return rb_float_new(temp);
 }
-
 
 VALUE method_get_cpu_temp(VALUE self) {
     SMCOpen();
     double temp = SMCGetTemperature(SMC_KEY_CPU_TEMP);
+    SMCClose();
+
+    return rb_float_new(temp);
+}
+
+VALUE method_get_gpu_temp(VALUE self) {
+    SMCOpen();
+    double temp = SMCGetTemperature(SMC_KEY_GPU_TEMP);
     SMCClose();
 
     return rb_float_new(temp);
@@ -437,6 +448,7 @@ int main(int argc, char *argv[])
     int i = 0, fans = SMCGetFanNumber(SMC_KEY_FAN_NUM);
     float bat_temp = SMCGetTemperature(SMC_KEY_BATTERY_TEMP);
     printf("CPU\t%0.1f\t°C\n", SMCGetTemperature(SMC_KEY_CPU_TEMP));
+    printf("GPU\t%0.1f\t°C\n", SMCGetTemperature(SMC_KEY_GPU_TEMP));
     printf("FAN_NUM\t%i\n", fans);
     for (i = 0; i < fans; i++)
         printf ("FAN_%i\t%0.1f\tRPM\n", i, SMCGetFanSpeed(i));

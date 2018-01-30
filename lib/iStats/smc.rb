@@ -65,7 +65,7 @@ module IStats
           'TC7C' => 'Core 7',
           'TC8C' => 'Core 8',
           'TCGC' => 'PECI GPU',
-          'TCGc' => 'PECI GPU',
+          'TCGC' => 'PECI GPU',
           'TCPG' => '',
           'TCSC' => 'PECI SA',
           'TCSc' => 'PECI SA',
