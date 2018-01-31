@@ -30,6 +30,8 @@ If you are running an older version of OS X and the install fails you might want
   istats all                           Print all stats
   istats cpu                           Print all CPU stats
   istats cpu [temp | temperature]      Print CPU temperature
+  istats gpu                           Print all GPU stats
+  istats gpu [temp | temperature]      Print GPU temperature
   istats fan                           Print all fan stats
   istats fan [speed]                   Print fan speed
   istats battery                       Print all battery stats
